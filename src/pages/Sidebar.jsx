@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { forwardRef,useEffect, useState } from 'react';
 import {
   DashboardOutlined,
   ProductOutlined,
@@ -17,7 +17,7 @@ const menuItems = [
   { key: '/edit-note', icon: <NotificationOutlined />, label: 'Edit Note' },
 ];
 
-const Sidebar = () => {
+const Sidebar = forwardRef(({ isOpen ,closeSidebar }, ref) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [selectedKeys, setSelectedKeys] = useState(location.pathname);
@@ -32,14 +32,20 @@ const Sidebar = () => {
 
   const handleMenuClick = (key) => {
     navigate(key);
+    closeSidebar();
   };
+
 
   const toggleProfileMenu = () => {
     setProfileMenuOpen(!profileMenuOpen);
   };
 
   return (
-    <div className="h-screen w-64 bg-gray-800 text-white">
+    <div 
+      ref={ref}
+      className={`h-screen w-64 bg-gray-800 text-white fixed transition-transform transform ${
+        isOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}
+    >
       <div className="flex flex-col items-center py-4">
         <h1 className="text-2xl font-bold mb-6">My Dashboard</h1>
         <div className="w-full">
@@ -82,6 +88,6 @@ const Sidebar = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Sidebar;

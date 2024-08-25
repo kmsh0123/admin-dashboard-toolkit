@@ -1,7 +1,6 @@
 import Main from "../layout/Main";
 import ChangePassword from "../pages/ChangePassword";
 import CreateNote from "../pages/CreateNote";
-import Dashboard from "../pages/Dashboard";
 import EditNote from "../pages/EditNote";
 import Index from "../pages/Index";
 import Information from "../pages/Information";
@@ -16,10 +15,6 @@ export const dashboardRoute = [
                 index : true,
                 element : <Index/>
             }, 
-            {
-                path : "/dashboard",
-                element : <Dashboard/>
-            },
             {
                 path : "/notes",
                 element : <Notes/>
